@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="twitternew">
+    <global-element type="http://www.mulesoft.org/schema/mule/twitter/config" name="Twitter" entity-id="1e70fe6c-5f4e-42eb-a55f-216bc69dec9b">
+        <properties>
+            <property value="johnapp123" name="name"/>
+            <property name="accessKey"/>
+            <property name="accessSecret"/>
+            <property value="huRsa1yizIcmvy3V7PrYw" name="consumerKey"/>
+            <property value="x9FzRvd0B9e0BQsHUm3hjUMCKcAdEnRGhjIJquFSRk" name="consumerSecret"/>
+            <property name="useSSL"/>
+            <property name="proxyHost"/>
+            <property name="proxyPort"/>
+            <property name="proxyUsername"/>
+            <property name="proxyPassword"/>
+        </properties>
+    </global-element>
+    <flow SubFlow="false" name="twitternewFlow1">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+        </properties>
+        <lane entity-id="df0fd66a-a4f5-4df7-a4be-493f4eda0a3e">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="4a743aa0-d1d8-4db4-9a89-bdf453ee1a20">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property name="httpLabel"/>
+                    <property value="localhost" name="host"/>
+                    <property value="8081" name="port"/>
+                    <property value="addtweet" name="path"/>
+                    <property name="method"/>
+                    <property name="address"/>
+                    <property name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="followRedirects"/>
+                    <property name="ref"/>
+                    <property name="connector-ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="user"/>
+                    <property name="password"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
+                </properties>
+            </endpoint>
+            <pattern type="http://www.mulesoft.org/schema/mule/twitter/twitter-connector" name="Twitter" entity-id="35099750-480a-44f2-9090-69229a1112bb">
+                <properties>
+                    <property value="johnapp123" name="config-ref"/>
+                    <property value="http://www.mulesoft.org/schema/mule/twitter/update-status" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="johnapp123" name="config-ref"/>
+                    <property value="#[header:INBOUND:mymessage]" name="status"/>
+                    <property name="inReplyTo"/>
+                    <property name="latitude"/>
+                    <property name="longitude"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/echo-component" name="Echo" entity-id="92ed576a-af42-4ff9-b701-61b492bdc619"/>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>

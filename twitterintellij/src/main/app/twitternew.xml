@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:twitter="http://www.mulesoft.org/schema/mule/twitter" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="CE-3.2.1" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+http://www.mulesoft.org/schema/mule/twitter http://www.mulesoft.org/schema/mule/twitter/3.1/mule-twitter.xsd 
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd ">
+	<!-- twitter:config consumerKey="7wOtMc9S24sU9GC5x6BFw" consumerSecret="5nP2FfcSVxjYDVQYzuWZQQzqlaucD5H9lnjHxKlU" format="JSON" name="johnapp123" oauthToken="461820558-7l40M68QVCAHAOwFWCoEf9rWccxVvEfpuxdEeYqu" oauthTokenSecret="TSoHJ54iyh34JDRMs5wxQpCq2NAWJ4t3vVEwkvhmWw"/-->
+	<twitter:config consumerKey="huRsa1yizIcmvy3V7PrYw" consumerSecret="x9FzRvd0B9e0BQsHUm3hjUMCKcAdEnRGhjIJquFSRk" format="JSON" name="johnapp123" oauthToken="461820558-rJJfsr8jmumNGk3q2QMQDTSctddh5oRkerqGPqPw" oauthTokenSecret="DgUt9f8L6JSJIDfph18TU8kg4tlrMy3B5Q9VeWff0Yg"/>  
+    <flow name="twitternewFlow1" doc:name="twitternewFlow1">
+        <http:inbound-endpoint  exchange-pattern="request-response" host="localhost" path="addtweet" port="8081" doc:name="HTTP"/>
+        <twitter:update-status config-ref="johnapp123" status="#[header:INBOUND:mymessage]" doc:name="Twitter"/>
+        <echo-component doc:name="Echo"/>
+    </flow>
+</mule>
